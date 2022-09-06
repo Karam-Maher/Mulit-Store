@@ -24,6 +24,12 @@
                             <p>{{$item['title2']}}</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route($item['route3'])}}" class="nav-link {{$item['route3'] == $active? 'active' : ''}}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>{{$item['title3']}}</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             @endforeach

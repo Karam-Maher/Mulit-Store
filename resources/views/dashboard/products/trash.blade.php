@@ -1,9 +1,10 @@
 @extends('dashboard.layouts.master')
-@section('title', 'Categories')
+@section('title', 'Trash Categories')
 
 @section('breadcrumb')
 @parent
 <li class="breadcrumb-item active">Categories</li>
+<li class="breadcrumb-item active">Trash</li>
 @endsection
 
 
@@ -27,10 +28,9 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Parent</th>
             <th>status</th>
             <th>Image</th>
-            <th>Created At</th>
+            <th>Deleted At</th>
             <th colspan="2">Action</th>
 
         </tr>
@@ -40,15 +40,18 @@
         <tr>
             <td>{{ $category->id }}</td>
             <td>{{ $category->name }}</td>
-            <td>{{ $category->parent_name }}</td>
             <td>{{ $category->status }}</td>
             <td><img src="{{ asset('storage/' . $category->image) }}" height="50"></td>
-            <td>{{ $category->created_at }}</td>
+            <td>{{ $category->deleted_at }}</td>
             <td>
-                <a href="{{ route('dashboard.categories.edit', $category->id) }}" class="btn btn-outline-success">Edit</a>
+            <form action="{{ route('dashboard.categories.restore', $category->id) }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" class="btn btn-outline-info">Restore</button>
+                </form>
             </td>
             <td>
-                <form action="{{ route('dashboard.categories.destroy', $category->id) }}" method="post">
+                <form action="{{ route('dashboard.categories.force-delete', $category->id) }}" method="post">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-outline-danger">Delete</button>
@@ -58,7 +61,7 @@
     </tbody>
 
     @empty
-    <td colspan="8">No categories defined..</td>
+    <td colspan="7">No categories defined..</td>
     @endforelse
 </table>
 {{$categories->withQueryString()->appends(['search' => 1])->links()}}
