@@ -41,14 +41,14 @@
         <tr>
             <td>{{$product->id}}</td>
             <td>{{$product->name}}</td>
-            <td>{{$product->category_id}}</td>
-            <td>{{$product->store_id}}</td>
-            <td><img src="" alt=""></td>
+            <td>{{$product->category->name}}</td>
+            <td>{{$product->store->name}}</td>
+            <td><img src="{{$product->image}}" alt="" height="100"></td>
             <td>{{$product->price}}</td>
             <td>{{$product->status}}</td>
             <td>{{$product->created_at}}</td>
             <td>
-                <a href="{{route('dashboard.products.edit',$product->id)}}" class="btn btn-sm btn-outline-info">Edit</a>
+                <a href="{{route('dashboard.products.edit',$product->id)}}" class="btn btn-sm btn-outline-success">Edit</a>
             </td>
             <td>
                 <form action="{{route('dashboard.products.destroy',$product->id)}}" method="post">

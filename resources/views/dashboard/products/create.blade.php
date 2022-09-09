@@ -1,18 +1,18 @@
 @extends('dashboard.layouts.master')
-@section('title', 'Create Categories')
+
+@section('title', 'Products')
 
 @section('breadcrumb')
-    @parent
-    <li class="breadcrumb-item active">Product / Create</li>
+@parent
+<li class="breadcrumb-item active">Products</li>
 @endsection
 
-
 @section('content')
-    <form action="{{ route('dashboard.categories.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        @include('dashboard.products._form',[
-'button_lable' => 'Add'
-            ])
-    </form>
+
+<form action="{{ route('dashboard.products.store') }}" method="post" enctype="multipart/form-data">
+    @csrf
+
+    @include('dashboard.products._form')
+</form>
 
 @endsection
