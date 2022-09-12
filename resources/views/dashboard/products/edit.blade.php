@@ -15,10 +15,11 @@
     @method('put')
 
     @include('dashboard.products._form', [
-    'button_label' => 'Update'
+        'button_label' => 'Update'
     ])
 </form>
 
-
-
 @endsection
+
+
+

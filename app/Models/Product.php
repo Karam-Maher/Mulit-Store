@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 
 class Product extends Model
 {
@@ -36,9 +38,32 @@ class Product extends Model
     {
         static::addGlobalScope('store', function (Builder $builder) {
             $user = Auth::user();
-            if ($user->store_id) {
+            if ($user && $user->store_id) {
                 $builder->where('store_id', '=', $user->store_id);
             }
         });
+    }
+    public function scopeActive(Builder $builder)
+    {
+        $builder->where('status', '=', 'active');
+    }
+
+    // Accessors
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image) {
+            return 'https://www.incathlab.com/images/products/default_product.png';
+        }
+        if (Str::startsWith($this->image, ['http://', 'https://'])) {
+            return $this->image;
+        }
+        return asset('storage/' . $this->image);
+    }
+    public function getSalePercentAttribute()
+    {
+        if (!$this->compare_price) {
+            return 0;
+        }
+        return number_format(100 - (100 * $this->price / $this->compare_price),1);
     }
 }
