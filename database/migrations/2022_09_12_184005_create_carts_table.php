@@ -28,6 +28,7 @@ return new class extends Migration
             $table->json('options')
                 ->nullable();
             $table->timestamps();
+            $table->unique(['cookie_id', 'product_id']);
         });
     }
 
