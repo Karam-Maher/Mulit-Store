@@ -71,8 +71,7 @@
                                                 <div class="single-form form-default">
                                                     <label>Mailing Address</label>
                                                     <div class="form-input form">
-                                                        <x-form.input name="addr[billing][street_address]"
-                                                            placeholder="Mailing Address" />
+                                                        <x-form.input name="addr[billing][street_address]"placeholder="Mailing Address" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -105,8 +104,7 @@
                                                 <div class="single-form form-default">
                                                     <label>Country</label>
                                                     <div class="form-input form">
-                                                        <x-form.select name="addr[billing][country]"
-                                                            :options="$countries" />
+                                                        <x-form.select name="addr[billing][country]" :options="$countries" />
                                                     </div>
                                                 </div>
                                             </div>

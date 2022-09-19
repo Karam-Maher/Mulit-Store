@@ -8,6 +8,8 @@ use App\Models\Product;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Throw_;
+use Throwable;
 
 class DeductProductQuantity
 {
@@ -29,14 +31,18 @@ class DeductProductQuantity
      */
     public function handle(OrderCreated $event)
     {
-        $order = $event->order;
-        foreach ($order->products as $product) {
-            $product->decrement('quantity',$product->pivot->quantity);
+        try {
+            $order = $event->order;
+            foreach ($order->products as $product) {
+                $product->decrement('quantity', $product->order_item->quantity);
 
-            // Product::where('id', '=', $item->product_id)
-            //     ->update([
-            //         'quantity' => DB::row("quantity - {$item->quantity}")
-            //     ]);
+                // Product::where('id', '=', $item->product_id)
+                //     ->update([
+                //         'quantity' => DB::row("quantity - {$item->quantity}")
+                //     ]);
+            }
+        } catch (Throwable $e) {
+            
         }
     }
 }

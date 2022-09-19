@@ -27,9 +27,9 @@ Route::get('/products/{product:slug}', [ProductsController::class, 'show'])
 
 Route::resource('cart', CartController::class);
 
-Route::get('/checkout', [CheckoutController::class, 'create'])
-    ->name('checkout');
-Route::post('/checkout', [CheckoutController::class, 'store']);
+
+Route::get('checkout', [CheckoutController::class, 'create'])->name('checkout');
+Route::post('checkout', [CheckoutController::class, 'store']);
 
 
 // Route::post('paypal/webhook', function () {
