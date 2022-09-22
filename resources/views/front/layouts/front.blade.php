@@ -8,7 +8,7 @@
     <title>{{$title ?? ''}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="https://demo.graygrids.com/themes/shopgrids/assets/images/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg">
 
     <link rel="stylesheet" href="{{ asset('front-assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('front-assets/css/LineIcons.3.0.css') }}">
@@ -76,28 +76,43 @@
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-middle">
                             <ul class="useful-links">
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/index.html">Home</a></li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/about-us.html">About Us</a>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about-us.html">About Us</a>
                                 </li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/contact.html">Contact Us</a>
+                                <li><a href="contact.html">Contact Us</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-end">
+                            @auth('web')
+                            <div class="user">
+                                <i class="lni lni-user"></i>
+                                {{ Auth::guard('web')->user()->name }}
+                            </div>
+                            <ul class="user-login">
+                                <li>
+                                    <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout').submit()">Sign out</a>
+                                </li>
+                                <form action="{{'logout'}}" method="post" id="logout" style="display:none;">
+                                    @csrf
+                                </form>
+                            </ul>
+                            @else
                             <div class="user">
                                 <i class="lni lni-user"></i>
                                 Hello
                             </div>
                             <ul class="user-login">
                                 <li>
-                                    <a href="https://demo.graygrids.com/themes/shopgrids/login.html">Sign In</a>
+                                    <a href="{{route('login')}}">Sign In</a>
                                 </li>
                                 <li>
-                                    <a href="https://demo.graygrids.com/themes/shopgrids/register.html">Register</a>
+                                    <a href="{{route('register')}}">Register</a>
                                 </li>
                             </ul>
+                            @endauth
                         </div>
                     </div>
                 </div>
@@ -110,7 +125,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-3 col-7">
 
-                        <a class="navbar-brand" href="https://demo.graygrids.com/themes/shopgrids/index.html">
+                        <a class="navbar-brand" href="index.html">
                             <img src="{{asset('front-assets/images/logo/logo.svg')}}" alt="Logo">
                         </a>
 
@@ -175,52 +190,52 @@
                         <div class="mega-category-menu">
                             <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
                             <ul class="sub-category">
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Electronics
+                                <li><a href="product-grids.html">Electronics
                                         <i class="lni lni-chevron-right"></i></a>
                                     <ul class="inner-sub-category">
-                                        <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Digital
+                                        <li><a href="product-grids.html">Digital
                                                 Cameras</a></li>
-                                        <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Camcorders</a>
+                                        <li><a href="product-grids.html">Camcorders</a>
                                         </li>
-                                        <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Camera
+                                        <li><a href="product-grids.html">Camera
                                                 Drones</a></li>
-                                        <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Smart
+                                        <li><a href="product-grids.html">Smart
                                                 Watches</a></li>
-                                        <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Headphones</a>
+                                        <li><a href="product-grids.html">Headphones</a>
                                         </li>
-                                        <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">MP3
+                                        <li><a href="product-grids.html">MP3
                                                 Players</a></li>
-                                        <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Microphones</a>
+                                        <li><a href="product-grids.html">Microphones</a>
                                         </li>
-                                        <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Chargers</a>
+                                        <li><a href="product-grids.html">Chargers</a>
                                         </li>
-                                        <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Batteries</a>
+                                        <li><a href="product-grids.html">Batteries</a>
                                         </li>
-                                        <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Cables
+                                        <li><a href="product-grids.html">Cables
                                                 &amp; Adapters</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">accessories</a>
+                                <li><a href="product-grids.html">accessories</a>
                                 </li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Televisions</a>
+                                <li><a href="product-grids.html">Televisions</a>
                                 </li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">best
+                                <li><a href="product-grids.html">best
                                         selling</a></li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">top 100
+                                <li><a href="product-grids.html">top 100
                                         offer</a></li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">sunglass</a>
+                                <li><a href="product-grids.html">sunglass</a>
                                 </li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">watch</a>
+                                <li><a href="product-grids.html">watch</a>
                                 </li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">man’s
+                                <li><a href="product-grids.html">man’s
                                         product</a></li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Home Audio
+                                <li><a href="product-grids.html">Home Audio
                                         &amp; Theater</a></li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Computers
+                                <li><a href="product-grids.html">Computers
                                         &amp; Tablets </a></li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Video
+                                <li><a href="product-grids.html">Video
                                         Games </a></li>
-                                <li><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Home
+                                <li><a href="product-grids.html">Home
                                         Appliances </a></li>
                             </ul>
                         </div>
@@ -235,55 +250,55 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a href="https://demo.graygrids.com/themes/shopgrids/index.html" aria-label="Toggle navigation">Home</a>
+                                        <a href="index.html" aria-label="Toggle navigation">Home</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="dd-menu active collapsed" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Pages</a>
                                         <ul class="sub-menu collapse" id="submenu-1-2">
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/about-us.html">About
+                                            <li class="nav-item"><a href="about-us.html">About
                                                     Us</a></li>
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/faq.html">Faq</a>
+                                            <li class="nav-item"><a href="faq.html">Faq</a>
                                             </li>
-                                            <li class="nav-item active"><a href="https://demo.graygrids.com/themes/shopgrids/login.html">Login</a>
+                                            <li class="nav-item active"><a href="login.html">Login</a>
                                             </li>
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/register.html">Register</a>
+                                            <li class="nav-item"><a href="register.html">Register</a>
                                             </li>
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/mail-success.html">Mail
+                                            <li class="nav-item"><a href="mail-success.html">Mail
                                                     Success</a></li>
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/404.html">404
+                                            <li class="nav-item"><a href="404.html">404
                                                     Error</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Shop</a>
                                         <ul class="sub-menu collapse" id="submenu-1-3">
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/product-grids.html">Shop
+                                            <li class="nav-item"><a href="product-grids.html">Shop
                                                     Grid</a></li>
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/product-list.html">Shop
+                                            <li class="nav-item"><a href="product-list.html">Shop
                                                     List</a></li>
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/product-details.html">shop
+                                            <li class="nav-item"><a href="product-details.html">shop
                                                     Single</a></li>
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/cart.html">Cart</a>
+                                            <li class="nav-item"><a href="cart.html">Cart</a>
                                             </li>
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/checkout.html">Checkout</a>
+                                            <li class="nav-item"><a href="checkout.html">Checkout</a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#submenu-1-4" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">Blog</a>
                                         <ul class="sub-menu collapse" id="submenu-1-4">
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/blog-grid-sidebar.html">Blog
+                                            <li class="nav-item"><a href="blog-grid-sidebar.html">Blog
                                                     Grid Sidebar</a>
                                             </li>
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/blog-single.html">Blog
+                                            <li class="nav-item"><a href="blog-single.html">Blog
                                                     Single</a></li>
-                                            <li class="nav-item"><a href="https://demo.graygrids.com/themes/shopgrids/blog-single-sidebar.html">Blog
+                                            <li class="nav-item"><a href="blog-single-sidebar.html">Blog
                                                     Single
                                                     Sibebar</a></li>
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="https://demo.graygrids.com/themes/shopgrids/contact.html" aria-label="Toggle navigation">Contact Us</a>
+                                        <a href="contact.html" aria-label="Toggle navigation">Contact Us</a>
                                     </li>
                                 </ul>
                             </div>
@@ -327,7 +342,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-12">
                             <div class="footer-logo">
-                                <a href="https://demo.graygrids.com/themes/shopgrids/index.html">
+                                <a href="index.html">
                                     <img src="Login%20-%20ShopGrids%20Bootstrap%205%20eCommerce%20HTML%20Template_files/white-logo.svg" alt="#">
                                 </a>
                             </div>
