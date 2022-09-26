@@ -43,7 +43,6 @@
                                 <div class="p-4">
                                     {!!$user->twoFactorQrCodeSvg()!!}
                                 </div>
-
                                 <h3>Recovery Codes</h3>
                                 <ul class="mb-3">
                                     @foreach ($user->recoveryCodes() as $code)

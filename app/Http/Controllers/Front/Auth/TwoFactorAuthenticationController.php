@@ -13,3 +13,4 @@ class TwoFactorAuthenticationController extends Controller
         return view('front.auth.two-factor-auth',compact('user'));
     }
 }
+

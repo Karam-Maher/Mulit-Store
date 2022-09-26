@@ -34,6 +34,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'tow_factor_secret',
+        'tow_factor_recovery_codes',
+        'tow_factor_confirmed_at',
     ];
 
     /**

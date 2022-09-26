@@ -14,6 +14,13 @@ class Product extends Model
     use HasFactory;
     protected $guarded = [];
 
+    protected $hidden =[
+        'created_at','updated_at','deleted_at','image'
+    ];
+    protected $appends=[
+        'image_url',
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
@@ -42,6 +49,9 @@ class Product extends Model
                 $builder->where('store_id', '=', $user->store_id);
             }
         });
+        static::creating(function(Product $product){
+            $product->slug = Str::slug($product->name);
+        });
     }
     public function scopeActive(Builder $builder)
     {
@@ -59,11 +69,42 @@ class Product extends Model
         }
         return asset('storage/' . $this->image);
     }
+
     public function getSalePercentAttribute()
     {
         if (!$this->compare_price) {
             return 0;
         }
-        return number_format(100 - (100 * $this->price / $this->compare_price),1);
+        return number_format(100 - (100 * $this->price / $this->compare_price), 1);
+    }
+    
+    public function scopeFilter(Builder $builder, $filters)
+    {
+        $options = array_merge([
+            'store_id' => null,
+            'category_id' => null,
+            'tag_id' => null,
+            'status' => 'active',
+        ], $filters);
+
+        $builder->when($options['status'], function ($query, $status) {
+            return $query->where('status', $status);
+        });
+        $builder->when($options['store_id'], function ($builder, $value) {
+            $builder->where('store_id', $value);
+        });
+        $builder->when($options['category_id'], function ($builder, $value) {
+            $builder->where('category_id', $value);
+        });
+        $builder->when($options['tag_id'], function ($builder, $value) {
+            $builder->whereExists(function ($query) use ($value) {
+                $query->select(1)
+                    ->form('product_tag')
+                    ->whereRaw('product_id = products.id')
+                    ->where('tag_id', $value);
+            });
+        });
     }
 }
+
+
