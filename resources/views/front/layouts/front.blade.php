@@ -47,27 +47,31 @@
                             <ul class="menu-top-link">
                                 <li>
                                     <div class="select-position">
-                                        <select id="select4">
-                                            <option value="0" selected="selected">$ USD</option>
-                                            <option value="1">€ EURO</option>
-                                            <option value="2">$ CAD</option>
-                                            <option value="3">₹ INR</option>
-                                            <option value="4">¥ CNY</option>
-                                            <option value="5">৳ BDT</option>
-                                        </select>
+                                        <form action="{{route('currency.store')}}" method="post">
+                                            @csrf
+                                            <select name="currency_code" onchange="this.form.submit()">
+                                                <option value="USD" @selected('USD' == session('currency_code'))>$ USD</option>
+                                                <option value="EURO" @selected('EURO' == session('currency_code'))>€ EURO</option>
+                                                <option value="ILS" @selected('ILS' == session('currency_code'))>$ ILS</option>
+                                                <option value="SAR" @selected('SAR' == session('currency_code'))>₹ SAR</option>
+                                                <option value="CNY" @selected('CNY' == session('currency_code'))>¥ CNY</option>
+                                                <option value="BDT" @selected('BDT' == session('currency_code'))>৳ BDT</option>
+                                            </select>
+                                        </form>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="select-position">
-                                        <select id="select5">
-                                            <option value="0" selected="selected">English</option>
-                                            <option value="1">Español</option>
-                                            <option value="2">Filipino</option>
-                                            <option value="3">Français</option>
-                                            <option value="4">العربية</option>
-                                            <option value="5">हिन्दी</option>
-                                            <option value="6">বাংলা</option>
+                                    <form action="{{ URL::current() }}" method="get">
+                                        <select name="locale" onchange="this.form.submit()">
+                                            <option value="en">English</option>
+                                            <option value="es">Español</option>
+                                            <option value="fr">Français</option>
+                                            <option value="ar">العربية</option>
+                                            <option value="in">हिन्दी</option>
+                                            <option value="cn">বাংলা</option>
                                         </select>
+                                    </form>
                                     </div>
                                 </li>
                             </ul>
@@ -76,7 +80,7 @@
                     <div class="col-lg-4 col-md-4 col-12">
                         <div class="top-middle">
                             <ul class="useful-links">
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="index.html">{{ __('app.Home') }}</a></li>
                                 <li><a href="about-us.html">About Us</a>
                                 </li>
                                 <li><a href="contact.html">Contact Us</a>

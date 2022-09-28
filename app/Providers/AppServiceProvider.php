@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\CurrencyConverter;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('currency_converter', function () {
+            return new CurrencyConverter(config('services.currency_converter.api_key'));
+        });
     }
 
     /**
@@ -24,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        App::setLocale(request('locale', 'en'));
         Paginator::useBootstrapFour();
     }
 }
